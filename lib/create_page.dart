@@ -8,6 +8,17 @@ class CreatePage extends StatefulWidget {
 }
 
 class _CreatePageState extends State<CreatePage> {
+  final formKey = GlobalKey<FormState>();
+  var title;
+  var subtitle;
+
+  void validate() {
+    final form = formKey.currentState;
+    if (form!.validate()) {
+      print("title $title \n subtitle $subtitle");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,29 +27,44 @@ class _CreatePageState extends State<CreatePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: "Title"),
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: "Subtitle"),
-            ),
-            SizedBox(
-              height: 48,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Salvar"),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                onChanged: (value) {
+                  title = value;
+                },
+                validator: (value) =>
+                    value!.isEmpty ? "Title precisa ser preenchido" : null,
+                decoration: InputDecoration(labelText: "Title"),
+              ),
+              TextFormField(
+                onChanged: (value) {
+                  subtitle = value;
+                },
+                validator: (value) =>
+                    value!.isEmpty ? "Subtitle precisa ser preenchido" : null,
+                decoration: InputDecoration(labelText: "Subtitle"),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        validate();
+                      },
+                      child: Text("Salvar"),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
