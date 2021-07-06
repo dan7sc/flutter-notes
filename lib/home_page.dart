@@ -14,19 +14,22 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Notes Raro Academy"),
       ),
-      body: Column(
-        children: [
-          Card(
-            child: ListTile(
-              leading: Icon(
-                Icons.book,
-                color: Colors.pink,
+      body: SingleChildScrollView(
+        child: Column(
+          children: List.generate(
+            10,
+            (index) => Card(
+              child: ListTile(
+                leading: Icon(
+                  Icons.book,
+                  color: Colors.pink,
+                ),
+                title: Text("Aprendendo navegaçao"),
+                subtitle: Text("Hoje foi irado!"),
               ),
-              title: Text("Aprendendo navegaçao"),
-              subtitle: Text("Hoje foi irado!"),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
