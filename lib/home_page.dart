@@ -9,6 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final notes = <Map<String, dynamic>>[];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,30 +20,29 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: List.generate(
-            100,
+            notes.length,
             (index) => Card(
               child: ListTile(
                 leading: Icon(
                   Icons.book,
                   color: Colors.pink,
                 ),
-                title: Text("Aprendendo navegaçao"),
-                subtitle: Text("Hoje foi irado!"),
+                title: Text(notes[index]['title']),
+                subtitle: Text(notes[index]['subtitle']),
               ),
             ),
           ),
         ),
       ),
-      floatingActionButtonLocation:
-        FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CreatePage(),
-            ),
-          );
+          Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CreatePage()))
+              .then((value) {
+            notes.add(value);
+            setState(() {});
+          });
         },
         icon: Icon(Icons.add),
         label: Text("Criar"),

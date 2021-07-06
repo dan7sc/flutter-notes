@@ -16,6 +16,12 @@ class _CreatePageState extends State<CreatePage> {
     final form = formKey.currentState;
     if (form!.validate()) {
       print("title $title \n subtitle $subtitle");
+      final map = Map<String, dynamic>();
+      map.addAll({
+        "title": title,
+        "subtitle": subtitle,
+      });
+      Navigator.pop(context, map);
     }
   }
 
