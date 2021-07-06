@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CreatePage extends StatefulWidget {
-  CreatePage({Key? key}) : super(key: key);
+  final String? title;
+  final String? subtitle;
+  CreatePage({
+    Key? key,
+    this.title,
+    this.subtitle,
+  }) : super(key: key);
 
   @override
   _CreatePageState createState() => _CreatePageState();
@@ -15,7 +21,6 @@ class _CreatePageState extends State<CreatePage> {
   void validate() {
     final form = formKey.currentState;
     if (form!.validate()) {
-      print("title $title \n subtitle $subtitle");
       final map = Map<String, dynamic>();
       map.addAll({
         "title": title,
@@ -23,6 +28,13 @@ class _CreatePageState extends State<CreatePage> {
       });
       Navigator.pop(context, map);
     }
+  }
+
+  @override
+  void initState() {
+    title = widget.title;
+    subtitle = widget.subtitle;
+    super.initState();
   }
 
   @override
@@ -39,6 +51,7 @@ class _CreatePageState extends State<CreatePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
+                initialValue: widget.title,
                 onChanged: (value) {
                   title = value;
                 },
@@ -47,6 +60,7 @@ class _CreatePageState extends State<CreatePage> {
                 decoration: InputDecoration(labelText: "Title"),
               ),
               TextFormField(
+                initialValue: widget.subtitle,
                 onChanged: (value) {
                   subtitle = value;
                 },

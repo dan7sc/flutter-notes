@@ -23,6 +23,20 @@ class _HomePageState extends State<HomePage> {
             notes.length,
             (index) => Card(
               child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreatePage(
+                        title: notes[index]['title'],
+                        subtitle: notes[index]['subtitle'],
+                      ),
+                    ),
+                  ).then((value) {
+                    notes[index] = value;
+                    setState(() {});
+                  });
+                },
                 leading: Icon(
                   Icons.book,
                   color: Colors.pink,
