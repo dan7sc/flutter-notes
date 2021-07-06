@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/create_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: List.generate(
-            10,
+            100,
             (index) => Card(
               child: ListTile(
                 leading: Icon(
@@ -34,7 +35,14 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation:
         FloatingActionButtonLocation.miniEndFloat,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CreatePage(),
+            ),
+          );
+        },
         icon: Icon(Icons.add),
         label: Text("Criar"),
       ),
