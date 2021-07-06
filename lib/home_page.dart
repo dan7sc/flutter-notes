@@ -31,6 +31,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+      floatingActionButtonLocation:
+        FloatingActionButtonLocation.miniEndFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        icon: Icon(Icons.add),
+        label: Text("Criar"),
+      ),
     );
   }
 }
